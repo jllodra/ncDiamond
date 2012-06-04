@@ -70,6 +70,10 @@
         <filter-name>Path Mapped Filter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <servlet-mapping>
+        <servlet-name>NcAbstractServlet</servlet-name>
+        <url-pattern>/NcAbstractServlet</url-pattern>
+    </servlet-mapping>
     <jsp-config>
         <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>
@@ -115,9 +119,11 @@
     <servlet>
         <servlet-name>ncInfo</servlet-name>
         <servlet-class>main.NcInfo</servlet-class>
-    </servlet>    
-    
-    
+    </servlet>
+        <servlet>
+        <servlet-name>ncData</servlet-name>
+        <servlet-class>main.NcData</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>RequestInfoExample</servlet-name>
         <servlet-class>examples.RequestInfoExample</servlet-class>
@@ -138,14 +144,15 @@
         <servlet-name>SessionExample</servlet-name>
         <servlet-class>examples.SessionExample</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>NcAbstractServlet</servlet-name>
+        <servlet-class>main.NcAbstractServlet</servlet-class>
+    </servlet>
     <!-- servlet mapping -->
-    
     <servlet-mapping>
         <servlet-name>CompressionFilterTestServlet</servlet-name>
         <url-pattern>/CompressionTest</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>Info</servlet-name>
         <url-pattern>/info</url-pattern>
@@ -154,7 +161,10 @@
         <servlet-name>ncInfo</servlet-name>
         <url-pattern>/ncInfo/*</url-pattern>
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>ncData</servlet-name>
+        <url-pattern>/ncData/*</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RequestInfoExample</servlet-name>
         <url-pattern>/servlet/RequestInfoExample/*</url-pattern>
@@ -249,5 +259,4 @@
         <env-entry-type>java.lang.Integer</env-entry-type>
         <env-entry-value>10</env-entry-value>
     </env-entry>
-
-    </web-app>
+</web-app>
