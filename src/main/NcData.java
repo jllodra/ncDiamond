@@ -14,14 +14,28 @@ import java.io.IOException;
 public class NcData extends NcAbstractServlet {
 
     @Override
-    protected void render() throws StandardException, IOException {
-        out.print("NcData servlet.");
-        //throw new UnsupportedOperationException("Not supported yet.");
+    protected Renderer getJSONRenderer() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    protected Renderer getJSONPRenderer() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    protected Renderer getNcMLRenderer() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    protected Renderer getCDLRenderer() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     protected void debug() {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
+    } 
+   
 }

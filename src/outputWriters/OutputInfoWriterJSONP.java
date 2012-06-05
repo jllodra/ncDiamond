@@ -5,7 +5,7 @@
 package outputWriters;
 
 import java.io.PrintWriter;
-import ucar.nc2.NetcdfFile;
+import ucar.nc2.dataset.NetcdfDataset;
 
 /**
  *
@@ -15,7 +15,7 @@ public final class OutputInfoWriterJSONP extends OutputInfoWriterJSON {
     
     private String callback;
     
-    public OutputInfoWriterJSONP(NetcdfFile ncFile, PrintWriter out, String callback) {
+    public OutputInfoWriterJSONP(NetcdfDataset ncFile, PrintWriter out, String callback) {
         super(ncFile, out);
         this.callback = callback;
     }

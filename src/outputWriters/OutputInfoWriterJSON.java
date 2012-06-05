@@ -9,8 +9,8 @@ import java.util.List;
 import ucar.ma2.Range;
 import ucar.nc2.Attribute;
 import ucar.nc2.Dimension;
-import ucar.nc2.NetcdfFile;
 import ucar.nc2.Variable;
+import ucar.nc2.dataset.NetcdfDataset;
 
 /**
  *
@@ -18,10 +18,10 @@ import ucar.nc2.Variable;
  */
 public class OutputInfoWriterJSON extends OutputInfoWriter {
 
-    protected NetcdfFile ncFile;
+    protected NetcdfDataset ncFile;
     protected PrintWriter out;
     
-    public OutputInfoWriterJSON(NetcdfFile ncFile, PrintWriter out) {
+    public OutputInfoWriterJSON(NetcdfDataset ncFile, PrintWriter out) {
         this.ncFile = ncFile;
         this.out = out;
     }

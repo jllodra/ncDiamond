@@ -12,8 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ucar.nc2.NetcdfFile;
 import ucar.nc2.dataset.NetcdfDataset;
+
 /**
  *
  * @author josep
@@ -28,9 +28,9 @@ public abstract class NcAbstractServlet extends HttpServlet {
     String output = "text/plain"; // default, must match with a content-type
     String callback = "callback"; // when output is jsonp
     // Netcdf resources
-    NetcdfFile ncFile = null;
+    NetcdfDataset ncFile = null;
     PrintWriter out = null;
-    
+
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -45,10 +45,12 @@ public abstract class NcAbstractServlet extends HttpServlet {
             throws ServletException, IOException {
         req = request;
         res = response;
+        rb = ResourceBundle.getBundle("LocalStrings", req.getLocale());
+        res.setCharacterEncoding("UTF-8");
         out = res.getWriter();
         try {
             gatherParameters();
-            ncFile = NetcdfDataset.openFile(src, null);
+            ncFile = NetcdfDataset.openDataset(src, true, null);
             // null means task can not be cancelled
             render();
         } catch (StandardException e) {
@@ -71,12 +73,46 @@ public abstract class NcAbstractServlet extends HttpServlet {
             throw new StandardException("Please, add parameter 'src', example: ");
         }
     }
-    
-    protected abstract void render() throws StandardException, IOException;
-    
+
+    private void render() throws StandardException, IOException {
+        Renderer renderer = null;
+        if ("application/json".equals(output)) { // JSON
+            res.setContentType(output + "; charset=utf-8");
+            renderer = getJSONRenderer();
+        } else if ("application/javascript".equals(output)) { // JSONP
+            res.setContentType(output + "; charset=utf-8");
+            renderer = getJSONPRenderer();
+        } else if ("application/xml".equals(output)) { // NcML
+            res.setContentType(output + "; charset=utf-8");
+            renderer = getNcMLRenderer();
+        } else if ("text/plain".equals(output)) { // CDL
+            res.setContentType(output + "; charset=utf-8");
+            renderer = getCDLRenderer();
+        } else {
+            // throw standard exception
+            throw new StandardException("No valid Mime-type for parameter Output.");
+        }
+        if (null == renderer) {
+            throw new UnsupportedOperationException("One renderer not supported in this servlet");
+        } else {
+            renderer.render();
+        }
+
+    }
+
+    protected abstract Renderer getJSONRenderer();
+
+    protected abstract Renderer getJSONPRenderer();
+
+    protected abstract Renderer getNcMLRenderer();
+
+    protected abstract Renderer getCDLRenderer();
+
     protected void debug() {
         out.print("NcAbstractServlet debug.");
-    };
+    }
+
+    ;
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
