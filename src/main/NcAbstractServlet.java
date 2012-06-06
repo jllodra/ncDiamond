@@ -65,12 +65,12 @@ public abstract class NcAbstractServlet extends HttpServlet {
         out.close();
     }
 
-    private void gatherParameters() throws StandardException {
+    protected void gatherParameters() throws StandardException {
         src = req.getParameter("src");
         output = (req.getParameter("output") != null) ? req.getParameter("output") : output;
         callback = (req.getParameter("callback") != null) ? req.getParameter("callback") : callback;
         if (null == src) {
-            throw new StandardException("Please, add parameter 'src', example: ");
+            throw new StandardException("Please, add parameter 'src', example: "); // TODO: example
         }
     }
 

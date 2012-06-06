@@ -11,10 +11,10 @@ import outputWriters.OutputDataWriterJSON;
  *
  * @author josep
  */
-public class NcData extends NcAbstractServlet {
+public class NcSimpleData extends NcAbstractServlet {
 
     String variableName;
-    
+
     @Override
     protected void gatherParameters() throws StandardException {
         super.gatherParameters();
@@ -35,7 +35,7 @@ public class NcData extends NcAbstractServlet {
                 outDataJSON.outputAll();
                 outDataJSON.outputSeparator();
                 outDataJSON.outputEnd();
-            }  
+            }
         };
     }
 
@@ -58,5 +58,5 @@ public class NcData extends NcAbstractServlet {
     protected void debug() {
         throw new UnsupportedOperationException("Not supported yet.");
     } 
-   
+
 }

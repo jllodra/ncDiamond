@@ -10,12 +10,12 @@ package outputWriters;
  */
 public abstract class OutputInfoWriter extends OutputWriter {
 
-    abstract void outputFileInfo();
+    protected abstract void outputFileInfo();
     
-    abstract void outputGlobalAttributes();
+    protected abstract void outputGlobalAttributes();
     
-    abstract void outputDimensions();
+    protected abstract void outputDimensions();
     
-    abstract void outputVariables();
+    protected abstract void outputVariables();
                 
 }

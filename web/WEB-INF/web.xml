@@ -120,9 +120,13 @@
         <servlet-name>ncInfo</servlet-name>
         <servlet-class>main.NcInfo</servlet-class>
     </servlet>
-        <servlet>
+    <servlet>
         <servlet-name>ncData</servlet-name>
         <servlet-class>main.NcData</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ncSimpleData</servlet-name>
+        <servlet-class>main.NcSimpleData</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RequestInfoExample</servlet-name>
@@ -164,6 +168,10 @@
     <servlet-mapping>
         <servlet-name>ncData</servlet-name>
         <url-pattern>/ncData/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ncSimpleData</servlet-name>
+        <url-pattern>/ncSimpleData/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RequestInfoExample</servlet-name>

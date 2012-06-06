@@ -29,7 +29,7 @@ public class OutputInfoWriterJSON extends OutputInfoWriter {
     @Override
     public void outputStart() {
         out.print("{");
-    }   
+    }
 
     @Override
     public void outputFileInfo() {
@@ -168,7 +168,11 @@ public class OutputInfoWriterJSON extends OutputInfoWriter {
                     out.print(a.getStringValue());
                     out.print("\"");
                 } else {
-                    out.print(a.getNumericValue());
+                    String s = String.valueOf(a.getNumericValue());
+                    if("NaN".equals(s)) {
+                       s = "\"" + s + "\"";
+                    }
+                    out.print(s);
                 }
                 if (j < sizej - 1) {
                     out.print(",");
