@@ -17,5 +17,6 @@ public abstract class OutputDataWriter extends OutputWriter {
     
     // Elaborated outputs
     protected abstract void outputVariableAttributes();
+    protected abstract void outputExtendedVariableData();
     
 }

@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import ucar.ma2.Array;
 import ucar.nc2.Attribute;
+import ucar.nc2.Dimension;
 import ucar.nc2.Variable;
 import ucar.nc2.dataset.NetcdfDataset;
 
@@ -51,9 +52,12 @@ public class OutputDataWriterJSON extends OutputDataWriter {
     @Override
     public void outputVariableData() {
         // Should have some sort of limit for safe memory usage...
+        String pre, post;
+        pre = post = (variable.getDataType().isString()) ? "\"" : "";
+        
         out.print("\"variable_data\":[");
-        boolean first = true;
         variableData.resetLocalIterator();
+        boolean first = true;
         while (variableData.hasNext()) {
             if (!first) {
                 out.print(",");
@@ -61,7 +65,9 @@ public class OutputDataWriterJSON extends OutputDataWriter {
                 first = false;
             }
             Object o = variableData.next();
+            out.print(pre);
             out.print(o);
+            out.print(post);
         }
         out.print("]");
     }
@@ -102,6 +108,29 @@ public class OutputDataWriterJSON extends OutputDataWriter {
         out.print("}");
     }
 
+    @Override
+    public void outputExtendedVariableData() {
+        // Should have some sort of limit for safe memory usage...
+        // Foreach rank (dimension) get dimension and iterate over variable
+        
+        List<Dimension> dimensions = variable.getDimensions();
+        out.print("\"number_of_dimensions\":" + dimensions.size() + ",");
+        
+        out.print("\"variable_data\":[");
+        boolean first = true;
+        variableData.resetLocalIterator();
+        while (variableData.hasNext()) {
+            if (!first) {
+                out.print(",");
+            } else {
+                first = false;
+            }
+            Object o = variableData.next();
+            out.print(o);
+        }
+        out.print("]");        
+    }
+    
     @Override
     public void outputSeparator() {
         out.println(",");
