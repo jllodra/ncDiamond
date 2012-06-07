@@ -4,12 +4,15 @@
  */
 package main;
 
+import exceptions.StandardException;
+import java.io.IOException;
+
 /**
  *
  * @author josep
  */
 public interface Renderer {
     
-    public void render();
+    public void render() throws StandardException, IOException;
     
 }

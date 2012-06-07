@@ -10,6 +10,12 @@ package outputWriters;
  */
 public abstract class OutputDataWriter extends OutputWriter {
     
-    protected abstract void outputAll(); // TODO: Should split this
+    // Simple outputs
+    protected abstract void outputVariableName();
+    protected abstract void outputVariableData();
+    protected abstract void outputVariableUnits();
+    
+    // Elaborated outputs
+    protected abstract void outputVariableAttributes();
     
 }

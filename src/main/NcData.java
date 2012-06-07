@@ -5,6 +5,7 @@
 package main;
 
 import exceptions.StandardException;
+import java.io.IOException;
 import outputWriters.OutputDataWriterJSON;
 
 /**
@@ -29,13 +30,17 @@ public class NcData extends NcAbstractServlet {
         // Check if variable exist
         return new Renderer(){
             @Override
-            public void render() {
+            public void render() throws StandardException, IOException {
                 OutputDataWriterJSON outDataJSON = new OutputDataWriterJSON(ncFile, variableName, out);
                 outDataJSON.outputStart();
-                outDataJSON.outputAll();
+                outDataJSON.outputVariableName();
+                outDataJSON.outputSeparator();
+                outDataJSON.outputVariableAttributes();
+                outDataJSON.outputSeparator();
+                outDataJSON.outputVariableData();
                 outDataJSON.outputSeparator();
                 outDataJSON.outputEnd();
-            }  
+            }
         };
     }
 

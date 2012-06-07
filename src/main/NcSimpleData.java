@@ -5,6 +5,9 @@
 package main;
 
 import exceptions.StandardException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import outputWriters.OutputDataWriterJSON;
 
 /**
@@ -19,20 +22,25 @@ public class NcSimpleData extends NcAbstractServlet {
     protected void gatherParameters() throws StandardException {
         super.gatherParameters();
         variableName = req.getParameter("var");
-        if(null == variableName) {
+        if (null == variableName) {
             throw new StandardException("Please, a 'var' parameter is needed, example: "); // TODO: example
         }
     }
-    
+
     @Override
     protected Renderer getJSONRenderer() {
         // Check if variable exist
-        return new Renderer(){
+        return new Renderer() {
+
             @Override
-            public void render() {
+            public void render() throws StandardException, IOException {
                 OutputDataWriterJSON outDataJSON = new OutputDataWriterJSON(ncFile, variableName, out);
                 outDataJSON.outputStart();
-                outDataJSON.outputAll();
+                outDataJSON.outputVariableName();
+                outDataJSON.outputSeparator();
+                outDataJSON.outputVariableUnits();
+                outDataJSON.outputSeparator();
+                outDataJSON.outputVariableData();
                 outDataJSON.outputSeparator();
                 outDataJSON.outputEnd();
             }
@@ -57,6 +65,5 @@ public class NcSimpleData extends NcAbstractServlet {
     @Override
     protected void debug() {
         throw new UnsupportedOperationException("Not supported yet.");
-    } 
-
+    }
 }
