@@ -33,7 +33,7 @@ public class NcData extends NcAbstractServlet {
             public void render() throws StandardException, IOException {
                 OutputDataWriterJSON outDataJSON = new OutputDataWriterJSON(ncFile, variableName, out);
                 outDataJSON.outputStart();
-                outDataJSON.outputVariableName();
+                outDataJSON.outputVariableNames();
                 outDataJSON.outputSeparator();
                 outDataJSON.outputVariableAttributes();
                 outDataJSON.outputSeparator();

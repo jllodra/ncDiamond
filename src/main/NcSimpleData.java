@@ -16,14 +16,14 @@ import outputWriters.OutputDataWriterJSON;
  */
 public class NcSimpleData extends NcAbstractServlet {
 
-    String variableName;
+    String variableNames;
 
     @Override
     protected void gatherParameters() throws StandardException {
         super.gatherParameters();
-        variableName = req.getParameter("var");
-        if (null == variableName) {
-            throw new StandardException("Please, a 'var' parameter is needed, example: "); // TODO: example
+        variableNames = req.getParameter("var");
+        if (null == variableNames) {
+            throw new StandardException("Please, a 'var' parameter is needed, example: var=AIRT|AIRP for both Air temperature and Air pressure."); // TODO: example
         }
     }
 
@@ -34,9 +34,9 @@ public class NcSimpleData extends NcAbstractServlet {
 
             @Override
             public void render() throws StandardException, IOException {
-                OutputDataWriterJSON outDataJSON = new OutputDataWriterJSON(ncFile, variableName, out);
+                OutputDataWriterJSON outDataJSON = new OutputDataWriterJSON(ncFile, variableNames, out);
                 outDataJSON.outputStart();
-                outDataJSON.outputVariableName();
+                outDataJSON.outputVariableNames();
                 outDataJSON.outputSeparator();
                 outDataJSON.outputVariableUnits();
                 outDataJSON.outputSeparator();

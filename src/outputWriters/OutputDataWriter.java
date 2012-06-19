@@ -4,6 +4,8 @@
  */
 package outputWriters;
 
+import java.io.IOException;
+
 /**
  *
  * @author josep
@@ -11,12 +13,12 @@ package outputWriters;
 public abstract class OutputDataWriter extends OutputWriter {
     
     // Simple outputs
-    protected abstract void outputVariableName();
+    protected abstract void outputVariableNames();
     protected abstract void outputVariableData();
     protected abstract void outputVariableUnits();
     
     // Elaborated outputs
     protected abstract void outputVariableAttributes();
-    protected abstract void outputExtendedVariableData();
+    protected abstract void outputExtendedVariableData() throws IOException;
     
 }
