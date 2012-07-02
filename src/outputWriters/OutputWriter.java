@@ -14,6 +14,7 @@ public abstract class OutputWriter {
     private long memory;
     
     public OutputWriter() {
+        // Should gc first
         millis = System.currentTimeMillis();
         memory = Runtime.getRuntime().freeMemory();
     }
